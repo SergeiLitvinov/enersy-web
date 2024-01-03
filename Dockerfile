@@ -1,15 +1,16 @@
 FROM python:3.13.0a2-slim-bookworm
 
-COPY ./requirements.txt /app/requirements.txt
+RUN pip install --upgrade pip
 
-WORKDIR /app
+RUN adduser -D www-data
+USER admin
+WORKDIR /home/www-data
 
-RUN pip install -r requirements.txt
+COPY --chown=www-data:www-data requirements.txt requirements.txt
+RUN pip install --user -r requirements.txt
 
-COPY . /app
+ENV PATH="/home/www-data/.local/bin:${PATH}"
 
-COPY . /app
+COPY --chown=www-data:www-data . .
 
-ENTRYPOINT [ "python" ]
-
-CMD ["main.py" ]
+CMD ["python", "main.py", "runserver", "0.0.0.0:8080"]
