@@ -1,10 +1,10 @@
 FROM python:3.13.0a2-slim-bookworm
 
-RUN pip install --upgrade pip
-
-RUN adduser -D www-data
+RUN useradd www-data
 USER www-data
 WORKDIR /home/www-data
+
+RUN pip install --upgrade pip
 
 COPY --chown=www-data:www-data requirements.txt requirements.txt
 RUN pip install --user -r requirements.txt
