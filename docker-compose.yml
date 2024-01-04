@@ -6,10 +6,15 @@ networks:
       name: test-network
 
 services:
-  portainer:
+  enersy-web:
     container_name: enersy-web
-    build:
-      context: .
+    image: enersy-web_enersy-web
+#    build:
+#      context: .
     ports:
       - "8080:8080"
     restart: always
+    volumes:
+      - ./main.py:/app/main.py
+      - ./templates/:/app/templates/
+      - ./static/:/app/static/

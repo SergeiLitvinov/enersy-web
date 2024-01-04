@@ -1,12 +1,16 @@
 #!/usr/bin/python
 # coding: utf-8
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__)
 
 @app.route('/')
-def entry_point():
-    return 'Hello World!'
+def index():
+    return render_template("index.html")
+
+@app.route('/login')
+def login():
+    return render_template("login.html")
 
 if __name__ == '__main__':
 #    from waitress import serve
