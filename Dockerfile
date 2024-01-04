@@ -1,16 +1,13 @@
 FROM python:3.13.0a2-slim-bookworm
 
-RUN pip install --upgrade pip
+ENV VIRTUAL_ENV=/opt/venv
+RUN python3 -m venv $VIRTUAL_ENV
+ENV PATH="$VIRTUAL_ENV/bin:$PATH"
+RUN pip3 install --upgrade pip
 
-RUN useradd user
-USER user
-WORKDIR /home/user
-
-COPY --chown=user:user requirements.txt requirements.txt
-RUN pip install --user -r requirements.txt
-
-ENV PATH="/home/user/.local/bin:${PATH}"
-
-COPY --chown=user:user . .
+WORKDIR /app
+COPY ./requirements.txt /app/requirements.txt
+RUN pip3 install -r requirements.txt
+COPY . /app
 
 CMD ["python", "main.py", "runserver", "0.0.0.0:8080"]
