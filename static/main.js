@@ -1,12 +1,24 @@
 let canvas = document.getElementById("canvas");
-let context = canvas.getContext("2d");
+let ctx = canvas.getContext("2d");
+fitToContainer(canvas);
 
-canvas.width = window.innerWidth - 30;
-canvas.height = window.innerHeight - 10;
+function fitToContainer(canvas){
+    canvas.style.width='100%';
+    canvas.style.height='100%';
+    //canvas.width  = canvas.offsetWidth;
+    //canvas.height = canvas.offsetHeight;
+  }
+//canvas.width = window.innerWidth - 30;
+//canvas.width = window.innerWidth;
+//canvas.style.width = 100%;
+//canvas.height = window.innerHeight - 10;
+//canvas.height = window.innerHeight;
+//canvas.style.height = 100%;
+
 canvas.style.border = '5px solid red';
 
-let canvas_width = canvas.width;
-let canvas_height = canvas.height;
+//let canvas_width = canvas.width;
+//let canvas_height = canvas.height;
 
 // let shape = []
 // shapes.push
